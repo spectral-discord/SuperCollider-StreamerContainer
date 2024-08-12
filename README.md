@@ -68,7 +68,7 @@ See how it says `Couldn't set realtime scheduling priority 1: Operation not perm
 
 ### "My issues isn't listed here"
 
-Open an [issue]() and I'll try to help!
+Open an [issue](github.com/spectral-discord/SuperCollider-StreamerContainer/issues) and I'll try to help!
 
 ## Services
 
@@ -90,7 +90,7 @@ SuperCollider --> Pipewire --> GStreamer --> Janus --> nginx --> your browser
 
 ## Contributing
 
-Know how to make SCSC better, or just wish it was in some way? Open a [PR]() or [issue]()!
+Know how to make SCSC better, or just wish it was in some way? Open a [PR](github.com/spectral-discord/SuperCollider-StreamerContainer/pulls) or [issue](github.com/spectral-discord/SuperCollider-StreamerContainer/issues)!
 
 ## TODO
 

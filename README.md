@@ -45,7 +45,7 @@ Upon starting a new session, you'll be entered into `sclang-mode`. Check out [SC
 
 ### Start fresh
 
-Exiting emacs via `C-x C-c` will kill the stream/synth/etc and end your ttyd session. It should immediately reconnect, if you don't close the tab, and you'll have a fresh new session to play with.
+Exiting emacs via `C-x C-c` will kill the stream/synth/etc and end your ttyd session. It should immediately reconnect, and you'll have a fresh new session to play with.
 
 ### Customization
 
@@ -74,7 +74,7 @@ Open an [issue](https://github.com/spectral-discord/SuperCollider-StreamerContai
 
 Service | Comment
 --- | ---
-[Supervisor](https://supervisord.org/) | As we need multiple services in this container we use this for service management - something like systemd
+[Supervisor](http://supervisord.org/) | As we need multiple services in this container we use this for service management - something like systemd
 [SuperCollider](https://supercollider.github.io) | Audio engine
 [PipeWire](https://pipewire.org) | Acts as a virtual soundcard
 [GStreamer](https://gstreamer.freedesktop.org) | Swiss army knife for converting media - converts the SuperCollider output to an Opus RTP stream which is sent to *Janus*

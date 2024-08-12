@@ -1,0 +1,11 @@
+# https://github.com/meetecho/janus-gateway/blob/master/conf/janus.plugin.streaming.jcfg.sample.in
+sc-stream-1: {
+	id = 1
+	type = "rtp"
+	audioport = 5002
+	audiopt = 111 # <audio RTP payload type> (e.g., 111)
+	audiortpmap = "opus/48000/2"
+	audio = true
+	video = false
+	data = false
+}

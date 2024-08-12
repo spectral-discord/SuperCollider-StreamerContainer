@@ -1,0 +1,7 @@
+services:
+  scsc:
+    image: hobgoblina/scsc:latest
+    container_name: scsc
+    ports:
+      - 1312:1312
+    restart: unless-stopped

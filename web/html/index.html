@@ -9,7 +9,7 @@
 		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/janus-gateway@0.2.3/html/janus.nojquery.js"></script>
 	</head>
 	<body>
-		<audio id="player" controls autoplay style="z-index: 1; position: absolute; right: 0;"></audio>
+		<audio id="player" controls autoplay style="z-index: 1; position: absolute; right: 0; bottom: 0;"></audio>
 		<script>
 			var opaqueId = 'streamingtest-' + Janus.randomString(12);
 			const audioElem = document.querySelector('#player');
@@ -19,7 +19,7 @@
 			iframe.width = '100%';
 			iframe.style.height = '100%';
 			iframe.style.position = 'absolute';
-			iframe.style.bottom = 0;
+			iframe.style.top = 0;
 			iframe.style.left = 0;
 			iframe.style.zIndex = 0;
 			iframe.allowFullscreen = true;

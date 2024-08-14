@@ -34,37 +34,54 @@
 
 ;; start stream on startup
 (defun start-sc-stream ()
-   (call-process-shell-command "cp -R /config/sclang-includes /usr/local/share/SuperCollider/Extensions")
-   (call-process-shell-command "/config/stream/start_stream.sh &"))
+  (call-process-shell-command "cp -R /config/sclang-includes /usr/local/share/SuperCollider/Extensions")
+  (call-process-shell-command "/config/stream/start_stream.sh &"))
 (add-hook 'emacs-startup-hook #'start-sc-stream)
 
 (defun kill-sc-stream ()
-   (call-process-shell-command "/config/stream/kill_stream.sh &"))
+  (call-process-shell-command "/config/stream/kill_stream.sh &"))
 (add-hook 'kill-emacs-hook #'kill-sc-stream)
 
 ;; change the default sclang UDP port
 ;; prevents conflict with SuperDirt
 (setq sclang-udp-port 5500)
 
+;; initialize windows and start modes
+;; func for starting tidal mode
+(defun tidal-start ()
+  (get-buffer-create "tidal")
+  (switch-to-buffer "tidal")
+  (tidal-mode)
+  (tidal-start-haskell)
+  (shrink-window (/ (window-height) 2))
+  (other-window -1))
+
 ;; func for splitting the window and running both sclang & tidal modes
 (defun open-both-sclang-tidal ()
-   (get-buffer-create "sclang")
-   (get-buffer-create "tidal")
-   (split-window-right)
-   (split-window-below)
-   (other-window 2)
-   (switch-to-buffer "tidal")
-   (split-window-below)
-   (tidal-mode)
-   (tidal-start-haskell)
-   (other-window 1)
-   (switch-to-buffer "sclang")
-   (sclang-start))
+  (get-buffer-create "sclang")
+  (split-window-right)
+  (split-window-below)
+  (other-window 2)
+  (split-window-below)
+  (tidal-start)
+  (other-window 2)
+  (switch-to-buffer "sclang")
+  (sclang-start)
+  (enlarge-window (/ (window-height (next-window)) 2)))
+
+;; func for opening the right mode based on the MODE env variable
+(defun start-scsc ()
+  (if (string= (getenv "MODE") "both")
+    (open-both-sclang-tidal)
+    (if (string= (getenv "MODE") "tidal")
+      (tidal-start)
+      (progn (sclang-start)
+        (enlarge-window (/ (window-height (next-window)) 2))))))
 
 
 ;;;;;;;;;;;;;;;;;; you can edit this stuff
 
-;; hide toolbar
+;; hide the menu bar
 (menu-bar-mode -1)
 
 ;; theme
@@ -72,3 +89,7 @@
 (load-theme 'catppuccin t)
 (setq catppuccin-flavor 'mocha)
 (catppuccin-reload)
+
+;; windmove
+(when (fboundp 'windmove-default-keybindings)
+  (windmove-default-keybindings))

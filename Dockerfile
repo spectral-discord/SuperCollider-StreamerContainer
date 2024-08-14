@@ -87,9 +87,10 @@ RUN cmake \
   -DNATIVE=ON \
   -DQUARKS=ON \
   -DSUPERNOVA=OFF .. \
-  && cmake --build . --config Release \
-  && cmake --build . --config Release --target install \
-  && rm -rf /root/sc3-plugins
+  && cmake --build . --config Release -j${MAKE_JOBS} \
+  && cmake --build . --config Release --target install -j${MAKE_JOBS} \
+  && rm -rf /root/sc3-plugins \
+  && mv /usr/local/share/SuperCollider/SC3plugins /usr/local/share/SuperCollider/Extensions/SC3plugins
 
 WORKDIR /root
 
@@ -183,6 +184,9 @@ COPY build/terminfo-24bit.src /root/terminfo-24bit.src
 RUN tic -x -o ~/.terminfo terminfo-24bit.src && \
   rm /root/terminfo-24bit.src
 
+ENV MODE=both
+ENV TTYD_BG_COLOR=1e1e2e
+
 # ------------------  EMACS
 
 # index SC docs so they can be accessed via w3m browser in emacs
@@ -220,7 +224,11 @@ COPY stream/SCStreamer/ /usr/local/share/SuperCollider/Extensions/SCStreamer/
 
 COPY config/supervisor.conf /root/supervisor.conf
 COPY config/pipewire.conf /usr/share/pipewire/pipewire.conf
+COPY config/start_ttyd.sh /root/start_ttyd.sh
+COPY config/start_container.sh /root/start_container.sh
 
+ENV JANUS_PUBLIC_IP=127.0.0.1
+COPY janus/janus.jcfg /opt/janus/etc/janus/janus.jcfg
 COPY janus/janus.plugin.streaming.jcfg /opt/janus/etc/janus/janus.plugin.streaming.jcfg
 # COPY janus/janus.plugin.audiobridge.jcfg /opt/janus/etc/janus/janus.plugin.audiobridge.jcfg
 # COPY janus/janus.plugin.audiobridge.jcfg.template /root/janus.plugin.audiobridge.jcfg.template
@@ -230,4 +238,4 @@ COPY janus/janus.plugin.streaming.jcfg /opt/janus/etc/janus/janus.plugin.streami
 RUN mkdir /config/sclang-includes \
   && chmod -R +x /config
 
-CMD ["/bin/sh", "-c", "/usr/bin/supervisord -c /root/supervisor.conf"]
+CMD ["/bin/sh", "-c", "/root/start_container.sh && supervisord -c /root/supervisor.conf"]

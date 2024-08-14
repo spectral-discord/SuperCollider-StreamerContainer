@@ -26,10 +26,20 @@ scsc:
   container_name: scsc
   ports:
     - 1312:1312
+  environment:
+    - MODE=both
+    - TTYD_BG_COLOR=1e1e2e
   volumes:
     - /some/path/on/your/machine:/config  # optional
   restart: unless-stopped
 ```
+
+#### Environment variables
+
+Variable | Description | Valid values | Default
+--- | --- | ---
+MODE | For choosing which mode to enter on starting a new session | `sclang`, `tidal`, `both` | `both`
+TTYD_BG_COLOR | Sets the ttyd background color (ie, the border around the emacs session) | A 6-digit, hexadecimal color code | `1e1e2e` (to match the default Catpuccin Mocha theme)
 
 ## Usage
 

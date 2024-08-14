@@ -47,17 +47,13 @@ Visit [localhost:1312](http://localhost:1312)
 
 The first time you visit the page, some Emacs dependencies will install. Be patient, it won't take long.
 
-Upon starting a new session, you'll be entered into `sclang-mode`. Check out [SCEL](https://github.com/supercollider/scel) to get started.
+[Windmove](https://www.emacswiki.org/emacs/WindMove) keybindings are activated by default, so you can use Shift + arrow keys to navigate between windows.
 
-### Tidal Cycles
-
-`C-c C-s` will put you into Tidal Cycles mode. Check out [Tidal Emacs](https://tidalcycles.org/docs/getting-started/editor/Emacs#test-tidal-with-emacs) to get started.
-
-### Start fresh
+#### Start fresh
 
 Exiting emacs via `C-x C-c` will kill the stream/synth/etc and end your ttyd session. It should immediately reconnect, and you'll have a fresh new session to play with.
 
-### Customization
+#### Customization
 
 By mounting the `/config` volume like in the `docker compose` example above, you can: 
 - edit `init.el` and `tmux.conf` to get a more preferred terminal experience
@@ -68,15 +64,15 @@ By mounting the `/config` volume like in the `docker compose` example above, you
 
 ## Issues
 
-### "I had sound before but now I don't"
+#### "I had sound before but now I don't"
 
 Try refreshing the page. You might just need to reestablish the WebRTC connection.
 
-### "There's a little latency between running code and hearing the output"
+#### "There's a little latency between running code and hearing the output"
 
 See how it says `Couldn't set realtime scheduling priority 1: Operation not permitted` in the post window? I haven't worked that out yet. Also, the stream currently uses a large buffer size to prevent skipping, due to the container's limited resources. I'll optimize it at some point.
 
-### "My issues isn't listed here"
+#### "My issues isn't listed here"
 
 Open an [issue](https://github.com/spectral-discord/SuperCollider-StreamerContainer/issues) and I'll try to help!
 

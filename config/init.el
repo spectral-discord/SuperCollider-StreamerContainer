@@ -38,6 +38,7 @@
   (call-process-shell-command "/config/stream/start_stream.sh &"))
 (add-hook 'emacs-startup-hook #'start-sc-stream)
 
+;; kill stream services on exit
 (defun kill-sc-stream ()
   (call-process-shell-command "/config/stream/kill_stream.sh &"))
 (add-hook 'kill-emacs-hook #'kill-sc-stream)
@@ -47,25 +48,23 @@
 (setq sclang-udp-port 5500)
 
 ;; initialize windows and start modes
-;; func for starting tidal mode
 (defun tidal-start ()
   (get-buffer-create "tidal")
   (switch-to-buffer "tidal")
   (tidal-mode)
   (tidal-start-haskell)
   (shrink-window (/ (window-height) 2))
-  (other-window -1))
+  (other-window -1)
+  (insert "-- Tidal Cycles workspace\n\n"))
 
 ;; func for splitting the window and running both sclang & tidal modes
 (defun open-both-sclang-tidal ()
-  (get-buffer-create "sclang")
   (split-window-right)
   (split-window-below)
   (other-window 2)
   (split-window-below)
   (tidal-start)
   (other-window 2)
-  (switch-to-buffer "sclang")
   (sclang-start)
   (enlarge-window (/ (window-height (next-window)) 2)))
 

@@ -205,6 +205,10 @@ RUN mkdir emacs \
 
 COPY config/init.el /config/init.el
 
+# smaller header for new sclang buffers
+RUN sed -i 's/	  (insert line)/;;	  (insert line)/g' /usr/local/share/emacs/site-lisp/SuperCollider/sclang-interp.el \
+  && rm /usr/local/share/emacs/site-lisp/SuperCollider/sclang-interp.elc
+
 # ------------------  WEBPAGES
 
 RUN apk add nginx

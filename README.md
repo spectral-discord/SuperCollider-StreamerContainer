@@ -1,4 +1,4 @@
-# SuperCollider Streaming Container
+# SuperCollider Streamer Container
 
 SCSC is a web-based audio live coding environment in a docker container.
 

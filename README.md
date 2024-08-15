@@ -37,9 +37,9 @@ scsc:
 #### Environment variables
 
 Variable | Description | Valid values | Default
---- | --- | ---
+--- | --- | --- | ---
 MODE | For choosing which mode to enter on starting a new session | `sclang`, `tidal`, `both` | `both`
-TTYD_BG_COLOR | Sets the ttyd background color (ie, the border around the emacs session) | A 6-digit, hexadecimal color code | `1e1e2e` (to match the default Catpuccin Mocha theme)
+TTYD_BG_COLOR | Sets the ttyd background color (the border around the emacs session) | A 6-digit, hexadecimal color code | `1e1e2e` (to match the default Catpuccin Mocha theme)
 
 ## Usage
 
